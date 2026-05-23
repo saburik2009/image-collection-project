@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Коллекция изображений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Моя коллекция изображений</h1>
+        <div class="controls">
+            <button id="add-btn">+ Добавить изображение</button>
+            <button id="clear-btn">Очистить всё</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="gallery" class="gallery"></div>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Добавить новое изображение</h2>
+            <input type="text" id="image-url" placeholder="Вставьте прямую ссылку на изображение" />
+            <div class="modal-buttons">
+                <button id="cancel-btn">Отмена</button>
+                <button id="add-image-btn">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
