@@ -1,3 +1,10 @@
+// config.js
+const config = {
+    imagesKey: 'imageCollection',
+    fullImagesKey: 'fullImageLinks',     // ← Добавлено по заданию
+    maxImages: 30
+};
+
 // Начальная коллекция изображений
 const initialImages = [
     "https://picsum.photos/id/1015/800/600",
