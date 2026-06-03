@@ -1,22 +1,14 @@
-// game.js - Загрузка изображений на Canvas 2D
-
-const Game = {
-    canvas: null,
-    ctx: null,
-    currentImageIndex: 0,
-    imageObjects: [],
-
-    characterImages: [
-        "https://picsum.photos/id/64/400/600",
-        "https://picsum.photos/id/201/400/600",
-        "https://picsum.photos/id/251/400/600",
-        "https://picsum.photos/id/133/400/600"
-    ],
+// game.js
+class Game {
+    constructor() {
+        this.canvas = null;
+        this.ctx = null;
+        this.hero = null;
+    }
 
     init() {
         console.log("🚀 Game.init() запущен");
 
-        // Создаём canvas
         this.canvas = document.createElement('canvas');
         this.canvas.id = 'game-canvas';
         this.canvas.width = 420;
@@ -34,63 +26,21 @@ const Game = {
 
         this.ctx = this.canvas.getContext('2d');
 
-        console.log("✅ Canvas создан");
+        // Создаём экземпляр героя
+        this.hero = new Hero();
+        this.hero.init(this.canvas, this.ctx);
 
-        this.loadImages();
-    },
-
-    loadImages() {
-        console.log("📥 Загружаем изображения...");
-
-        this.characterImages.forEach((src, index) => {
-            const img = new Image();
-            img.src = src;
-
-            img.onload = () => {
-                this.imageObjects[index] = img;
-                console.log(`✅ Изображение ${index + 1} загружено`);
-
-                // Рисуем первое изображение сразу
-                if (index === 0) this.drawImage0();
-            };
-
-            img.onerror = () => {
-                console.error(`❌ Не удалось загрузить: ${src}`);
-            };
-        });
-    },
-
-    drawImage0() {
-        if (!this.ctx || this.imageObjects.length === 0) return;
-
-        const img = this.imageObjects[this.currentImageIndex];
-        if (!img) return;
-
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        const x = (this.canvas.width - 400) / 2;
-        const y = 40;
-
-        this.ctx.drawImage(img, x, y, 400, 600);
-
-        this.ctx.fillStyle = 'white';
-        this.ctx.font = 'bold 22px Segoe UI';
-        this.ctx.textAlign = 'center';
-        this.ctx.fillText(`Персонаж ${this.currentImageIndex + 1} / 4`, this.canvas.width / 2, 28);
-    },
-
-    nextImage() {
-        this.currentImageIndex = (this.currentImageIndex + 1) % this.characterImages.length;
-        this.drawImage0();
+        console.log("✅ Игра и герой инициализированы");
     }
-};
+}
 
-// Запуск
-Game.init();
+// Запуск игры
+const game = new Game();
+game.init();
 
-// Автосмена каждые 3 секунды
+// Автопереключение
 setInterval(() => {
-    if (Game.imageObjects.length > 0) {
-        Game.nextImage();
+    if (game.hero) {
+        game.hero.nextImage();
     }
 }, 3000);
