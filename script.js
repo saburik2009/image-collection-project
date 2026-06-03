@@ -109,3 +109,8 @@ modal.addEventListener('click', (e) => {
 
 // Инициализация
 renderGallery();
+
+// Инициализация Canvas игры
+if (typeof Game !== 'undefined') {
+    Game.init();
+}
